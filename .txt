@@ -1,0 +1,18 @@
+x= index
+
+x= 10
+index= 9
+
+x0 es mayor que x1 
+index+1(esto va pasar cuando haya un cambio)
+
+
+index=0+1
+
+
+si index es 0
+
+finaliza proceso
+
+Yo necesito saber como hacer mis practicas solo, estoy perdidisimo,
+tengo que aprender a buscarlo, y blabla sin chatgpt de mierda.

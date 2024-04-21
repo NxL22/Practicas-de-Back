@@ -1,0 +1,13 @@
+PRODUCTO:
+
+ID : NUM
+
+NAME : STRING 
+
+PRICE : FLOAT
+
+CAPACITY: NUM --> Supuestamente "Sequelize no tiene un
+ tipo NUMBER, y INTEGER es más adecuado si capacity se espera 
+ que sea un número entero."
+
+DESCRIPTION: STRING{ validate:[len:1-250]}
