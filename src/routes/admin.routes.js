@@ -3,6 +3,47 @@ import adminService from "../service/admin.service.js";
 
 const adminRoutes = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: admins
+ *   description: Operaciones relacionadas con los admins
+ */
+
+/**
+ * @swagger
+ * /admin/create:
+ *   post:
+ *     summary: Crea un nuevo administrador
+ *     tags: [admins]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/AdminCreate'
+ *     responses:
+ *       '201':
+ *         description: Admin creado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties: 
+ *                 name:
+ *                   type: string
+ *                   description: Nombre del administrador.
+ *                 email:
+ *                   type: string
+ *                   format: email
+ *                   description: Dirección de correo electrónico del administrador.
+ *                 token:
+ *                    type: string
+ *  
+ *       '500':
+ *         description: Error del servidor
+ */
+
 adminRoutes.post("/create", async (req, res) => {
   try {
     const response = await adminService.createAdmin(req.body);

@@ -2,8 +2,43 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import UserRole from '../utils/enum/user-role.enum.js';
 
-const UserEntity = sequelize.define('User', {
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *         - password
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Nombre del usuario
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Correo electrónico del usuario
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: Contraseña del usuario
+ *         description:
+ *           type: string
+ *           description: Descripción opcional del usuario
+ *         role:
+ *           type: string
+ *           enum:
+ *             - ADMIN
+ *             - USER
+ *           description: Rol del usuario
+ */
 
+
+
+
+const UserEntity = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -34,12 +69,10 @@ const UserEntity = sequelize.define('User', {
             len: [1, 255]
         }
     },
-    
     role: {
         type: DataTypes.ENUM(...Object.values(UserRole)),
         allowNull: false
     }
-
 });
 
 export default UserEntity;

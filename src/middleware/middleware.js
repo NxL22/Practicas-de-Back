@@ -51,9 +51,11 @@ export const authenticateJWT = async (req, res, next) => {
         const token = authHeader.split(" ")[1];
 
         if (!token) return res.status(401).json({ message: "Token no encontrado" })
+    
 
         try {
             const decoded = jwt.verify(token, secretKey);
+
 
             if (decoded.role === UserRole.Admin) {
                 const admin = await AdminEntity.findOne({ where: { email: decoded.email } });
@@ -66,9 +68,7 @@ export const authenticateJWT = async (req, res, next) => {
             } else {
                 const user = await UserEntity.findOne({ where: { email: decoded.email } });
 
-                if (!user) {
-                    return res.status(401).json({ message: "Usuario no encontrado" });
-                }
+                if (!user) return res.status(401).json({ message: "Usuario no encontrado" });
 
                 req.user = user;
             }
@@ -95,6 +95,55 @@ export const adminGuard = async (req, res, next) => {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
+
+export const prueba = async (req, res, next) => {
+    console.log(req.headers.host);
+    const authHeader = req.headers.authorization;
+
+
+    if (authHeader) {
+        const token = authHeader.split(" ")[1];
+
+        if (!token) return res.status(401).json({ message: "Token no encontrado" })
+    
+
+        try {
+            const decoded = jwt.verify(token, secretKey);
+
+
+            if (decoded.role === UserRole.Admin) {
+                const admin = await AdminEntity.findOne({ where: { email: decoded.email } });
+
+                if (!admin) {
+                    return res.status(401).json({ message: "Usuario administrador no encontrado" });
+                }
+
+                req.user = admin;
+            } else {
+                const user = await UserEntity.findOne({ where: { email: decoded.email } });
+
+                if (!user) return res.status(401).json({ message: "Usuario no encontrado" });
+
+                req.user = {usuario:'juanito',id:'pepe'};
+            }
+
+            next();
+        } catch (error) {
+            console.error("Error en la autenticación JWT:", error);
+            return res.status(403).json({ message: "Token inválido" });
+        }
+    } else {
+        res.status(401).json({ message: "Se requiere token de autenticación" });
+    }
+    
+};
+
+
+
+
+
+
 
 
 

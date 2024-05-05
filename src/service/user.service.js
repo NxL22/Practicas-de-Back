@@ -28,7 +28,7 @@ class UserService {
     //     }
     // }
 
-    async loginUser({email, password}) {
+    async loginUser(email, password) {
         try {
             const user = await UserEntity.findOne({ where: { email } });
             if (!user) throw new Error("El usuario no existe");
@@ -42,6 +42,30 @@ class UserService {
         }
     }
 
+    async prueba(email, password) {
+        try {
+            const userExists = await this.userByEmail(email)
+            if (!userExists) {
+                throw new Error("Te faltan datos");
+            }
+            const isMatch = await bcrypt.compare(password, userExists.password);
+            if (!isMatch) throw new Error("Te faltan datos");
+            const token =  EncriptionFunc.prueba(userExists);
+            delete userExists.dataValues.password;
+            return  { userExists, token };
+        } catch (error) {
+            throw new Error("Error al buscar el usuario: " + error.message);
+        }
+    }
+
+    async userByEmail(email) {
+        try {
+            const user = await UserEntity.findOne({ where: { email } });
+            return user
+        } catch (error) {
+            throw new Error("Error al buscar el usuario: " + error.message);
+        }
+    }
 
     async createUser(userData) {
         const { name , email, password } = userData;

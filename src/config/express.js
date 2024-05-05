@@ -7,7 +7,8 @@ import userRoutes from "../routes/user.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
 import productRoutes from "../routes/product.routes.js";
 import authRoutes from "../routes/auth.routes.js";
-
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 const expressApp = express();
 
@@ -16,6 +17,24 @@ expressApp.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization','reset','pos'],
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
   }));
+
+  const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'API Documentación',
+            version: '1.0.0',
+            description: 'Documentación de la API de tu aplicación',
+        },
+  
+    },
+    apis: ['./src/**/*.js'] // Asegúrate de que la ruta sea correcta
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+
+expressApp.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   expressApp.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
   expressApp.use(bodyParser.json({ limit: "50mb"} ));

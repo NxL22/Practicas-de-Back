@@ -2,7 +2,38 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import UserRole from '../utils/enum/user-role.enum.js';
 
-// Aqui admin esta en mayuscula y en la otra en minuscula
+
+// ACA EMPIEZA DEFINIENDO EL SCHEMA DE ADMIN 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Admin:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: ID del admin
+ *           example: 1
+ *         name:
+ *           type: string
+ *           description: Nombre del admin
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Correo electrónico del admin
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: Contraseña del admin
+ *         role:
+ *           type: string
+ *           enum:
+ *             - ADMIN
+ *             - USER
+ *           description: Rol del usuario
+ */
+
 const AdminEntity = sequelize.define('Admin', {
 
     id: {
@@ -11,7 +42,7 @@ const AdminEntity = sequelize.define('Admin', {
         autoIncrement: true,
         allowNull: false,
         unique: true
-    },  
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -33,7 +64,7 @@ const AdminEntity = sequelize.define('Admin', {
 
         allowNull: false
     }
-    
+
 
 });
 

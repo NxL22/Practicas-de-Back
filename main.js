@@ -3,14 +3,14 @@ import sequelize from "./src/config/db.js";
 import httpServer from "./src/config/http.js"
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 async function bootstrap() {
     const PORT = process.env.PORT;
 
     try {
-        // Intenta sincronizar con la base de datos
-        await sequelize.sync({ force: true });
+        await sequelize.sync({force:true});
         console.log('Conexión a la base de datos establecida correctamente.');
 
         // Inicia el servidor HTTP
