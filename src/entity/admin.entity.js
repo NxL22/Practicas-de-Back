@@ -3,7 +3,6 @@ import sequelize from '../config/db.js';
 import UserRole from '../utils/enum/user-role.enum.js';
 
 
-// ACA EMPIEZA DEFINIENDO EL SCHEMA DE ADMIN 
 /**
  * @swagger
  * components:
@@ -33,7 +32,6 @@ import UserRole from '../utils/enum/user-role.enum.js';
  *             - USER
  *           description: Rol del usuario
  */
-
 const AdminEntity = sequelize.define('Admin', {
 
     id: {

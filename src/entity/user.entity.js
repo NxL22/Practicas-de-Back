@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import UserRole from '../utils/enum/user-role.enum.js';
 
+
 /**
  * @swagger
  * components:
@@ -34,10 +35,6 @@ import UserRole from '../utils/enum/user-role.enum.js';
  *             - USER
  *           description: Rol del usuario
  */
-
-
-
-
 const UserEntity = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,

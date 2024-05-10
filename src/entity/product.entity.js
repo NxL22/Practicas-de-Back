@@ -2,7 +2,38 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 
 
-//no se si va en mayus o no "Product"
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       required:
+ *         - name
+ *         - price
+ *         - capacity
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: Identificador único del producto
+ *         userId:
+ *           type: integer
+ *           description: Identificador del usuario propietario del producto
+ *         name:
+ *           type: string
+ *           description: Nombre del producto
+ *         price:
+ *           type: number
+ *           format: float
+ *           description: Precio del producto
+ *         capacity:
+ *           type: integer
+ *           description: Capacidad del producto
+ *         description:
+ *           type: string
+ *           description: Descripción del producto
+ */
 const ProductEntity = sequelize.define('Product', {
 
     id: {

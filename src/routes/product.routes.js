@@ -2,8 +2,14 @@ import { Router } from "express";
 import productService from "../service/product.service.js";
 import { adminGuard, authenticateJWT } from "../middleware/middleware.js";
 
-
 const productRoutes = Router();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Product
+ *   description: Operaciones relacionadas con las autorizaciones
+ */
 
 productRoutes.get("/hello", async (req, res) => {
     try {
@@ -19,7 +25,7 @@ productRoutes.get("/hello", async (req, res) => {
 
 })
 
-// explicar este**
+
 productRoutes.post("/create", authenticateJWT, adminGuard, async (req, res) => {
     try {
         const userId  = req.user.id;

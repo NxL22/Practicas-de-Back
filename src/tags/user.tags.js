@@ -23,8 +23,7 @@
  */
 
 
-
-
+//Este es del get
 /**
  * @swagger
  * components:

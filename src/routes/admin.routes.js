@@ -6,7 +6,7 @@ const adminRoutes = Router();
 /**
  * @swagger
  * tags:
- *   name: admins
+ *   name: Admins
  *   description: Operaciones relacionadas con los admins
  */
 
@@ -15,7 +15,7 @@ const adminRoutes = Router();
  * /admin/create:
  *   post:
  *     summary: Crea un nuevo administrador
- *     tags: [admins]
+ *     tags: [Admins]
  *     requestBody:
  *       required: true
  *       content:
@@ -52,6 +52,7 @@ adminRoutes.post("/create", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 })
+
 
 adminRoutes.get("/", async (_req, res) => {
   const response = await adminService.getAdmin();
